@@ -19,4 +19,10 @@ joiSchema.updateEmployeeSchema = {
     })
 }
 
+joiSchema.deleteEmployeeSchema = {
+    query: joi.object({
+        employeeId: joi.number().required(),
+    })
+}
+
 module.exports = joiSchema;

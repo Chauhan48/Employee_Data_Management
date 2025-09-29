@@ -16,9 +16,14 @@ async function updateEmployee(query, filter){
     return await db('employees').where(filter).update(query);
 }
 
+async function deleteEmployee(filter){
+    return await db('employees').where(filter).del();
+}
+
 module.exports = {
     addEmployee,
     findEmployee,
     getEmployee,
-    updateEmployee
+    updateEmployee,
+    deleteEmployee
 }

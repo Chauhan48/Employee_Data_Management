@@ -1,4 +1,4 @@
-const { addEmployee, findEmployee, getEmployee, updateEmployee } = require("../services/dbServices");
+const { addEmployee, findEmployee, getEmployee, updateEmployee, deleteEmployee } = require("../services/dbServices");
 
 const employeeController = {};
 
@@ -24,6 +24,19 @@ employeeController.updateEmployee = async (req, res) => {
             return res.status(400).json({ message: 'Employee not found or no changes made.' })
         }
         return res.status(200).json({ message: 'Data updated successfully' })
+    } catch (err) {
+        return res.status(500).json({ message: 'Internal server error' })
+    }
+}
+
+employeeController.deleteEmployee = async (req, res) => {
+    try {
+        const { employeeId } = req.query;
+        const result = await deleteEmployee({ employeeId });
+        if (!result) {
+            return res.status(400).json({ message: 'Employee not found or no changes made.' })
+        }
+        return res.status(200).json({ message: 'Employee data deleted successfully' })
     } catch (err) {
         return res.status(500).json({ message: 'Internal server error' })
     }

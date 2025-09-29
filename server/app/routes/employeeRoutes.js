@@ -6,6 +6,8 @@ const employeeRoutes = require('express').Router();
 
 employeeRoutes.post('/add-employee', schemaValidation(joiSchema.addEmployeeSchema), employeeController.addEmployee);
 
-employeeRoutes.post('/update-employee', schemaValidation(joiSchema.updateEmployeeSchema), employeeController.updateEmployee);
+employeeRoutes.put('/update-employee', schemaValidation(joiSchema.updateEmployeeSchema), employeeController.updateEmployee);
+
+employeeRoutes.delete('/delete-employee', schemaValidation(joiSchema.deleteEmployeeSchema), employeeController.deleteEmployee);
 
 module.exports = employeeRoutes
