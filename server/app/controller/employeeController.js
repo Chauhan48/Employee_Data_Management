@@ -65,12 +65,12 @@ employeeController.filterEmployee = async (req, res) => {
 
 employeeController.getEmployees = async (req, res) => {
     try {
-        const emplyees = await getEmployees();
+        const employees = await getEmployees();
         const positions = await getDistinctFields('position');
-        if (emplyees.length === 0) {
+        if (employees.length === 0) {
             return res.status(200).json({ message: 'There are currently no employees' });
         }
-        return res.status(200).json({ emplyees, positions });
+        return res.status(200).json({ employees, positions });
     } catch (err) {
         console.log(err)
         return res.status(500).json({ message: 'Internal server error' })
