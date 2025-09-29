@@ -4,27 +4,52 @@ import EditIcon from '@mui/icons-material/Edit';
 import { deleteEmployeeData } from '../services/apiServices';
 import { useState } from 'react';
 import Message from './Message';
+import Popup from './Popup';
 
 export default function EmployeeCard({ employeeData, handleChange }) {
     const [successMessage, setSuccessMessage] = useState('');
     const [alertPopup, setAlertPopup] = useState(false);
+    const [openPopUp, setOpenPopup] = useState(false);
 
     const handleEdit = () => {
+        setOpenPopup(true);
     }
-    
-    const handleDelete = async () => {
-        const response = await deleteEmployeeData(employeeData.employeeId);
-        setSuccessMessage(response.message);
+
+    const handleMessage = (message) => {
+        setSuccessMessage(message);
         setAlertPopup(true);
         setTimeout(() => {
             setAlertPopup(false)
             handleChange();
-        }, 1050);
+        }, 1000);
+    }
+
+    const handleClosePopup = () => {
+        setOpenPopup(false);
+    }
+
+    const handleDelete = async () => {
+        const response = await deleteEmployeeData(employeeData.employeeId);
+        // setSuccessMessage(response.message);
+        // setAlertPopup(true);
+        // setTimeout(() => {
+        //     setAlertPopup(false)
+        //     handleChange();
+        // }, 1050);
+        handleMessage(response.message)
     }
 
     return (
         <>
             {alertPopup && <Message message={successMessage} />}
+            {openPopUp && <Popup
+                open={openPopUp}
+                closePopup={handleClosePopup}
+                data={employeeData}
+                displayMessage={handleMessage}
+                addOrUpdate={'Update'}
+
+            />}
             <Card sx={{ maxWidth: 345, margin: 'auto', m: 2, boxShadow: 4 }}>
                 <CardActionArea sx={{ p: 4, height: '100%' }}>
                     <Typography variant="h5" component="div" gutterBottom>{employeeData.name}</Typography>

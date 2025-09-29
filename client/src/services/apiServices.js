@@ -18,3 +18,12 @@ export const deleteEmployeeData = async (employeeId) => {
         return err;
     }
 }
+
+export const updateEmployeeData = async (employeeData) => {
+    try{
+        const response = await axios.put(`${API}/update-employee`, employeeData);
+        return response.data;
+    }catch(err){
+        return err;
+    }
+}

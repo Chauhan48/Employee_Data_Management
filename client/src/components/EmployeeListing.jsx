@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import EmployeeCard from "./EmployeeCard";
 import { getEmployeeListing } from "../services/apiServices";
 import { Grid } from "@mui/material";
+import AddIcon from '@mui/icons-material/Add';
 
 export default function EmployeeListing() {
     const [employeeListing, setEmployeeListing] = useState([]);
