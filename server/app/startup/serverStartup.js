@@ -1,4 +1,5 @@
 const cors = require('cors');
+const employeeRoutes = require('../routes/employeeRoutes');
 
 module.exports = async (app) => {
     app.use(require('express').json());
@@ -12,4 +13,5 @@ module.exports = async (app) => {
         allowedHeaders: ['Content-Type', 'Authorization']
     }));
     app.use(require('express').urlencoded({ extended: true }));
+    app.use('/api', employeeRoutes);
 }
