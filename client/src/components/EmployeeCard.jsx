@@ -30,12 +30,6 @@ export default function EmployeeCard({ employeeData, handleChange }) {
 
     const handleDelete = async () => {
         const response = await deleteEmployeeData(employeeData.employeeId);
-        // setSuccessMessage(response.message);
-        // setAlertPopup(true);
-        // setTimeout(() => {
-        //     setAlertPopup(false)
-        //     handleChange();
-        // }, 1050);
         handleMessage(response.message)
     }
 

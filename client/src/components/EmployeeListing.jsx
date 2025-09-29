@@ -1,14 +1,36 @@
 import { useEffect, useState } from "react";
 import EmployeeCard from "./EmployeeCard";
 import { getEmployeeListing } from "../services/apiServices";
-import { Grid } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
+import Popup from "./Popup";
+import Message from "./Message";
 
 export default function EmployeeListing() {
     const [employeeListing, setEmployeeListing] = useState([]);
+    const [openPopup, setOpenPopup] = useState(false);
+    const [successMessage, setSuccessMessage] = useState('');
+    const [alertPopup, setAlertPopup] = useState(false);
+
+    const handleMessage = (message) => {
+        setSuccessMessage(message);
+        setAlertPopup(true);
+        setTimeout(() => {
+            setAlertPopup(false)
+            handleChildComponent();
+        }, 1000);
+    }
+
+    const handleClosePopup = () => {
+        setOpenPopup(false);
+    }
 
     const handleChildComponent = () => {
         window.location.reload();
+    }
+
+    const handleFilter = () => {
+        setOpenPopup(true);
     }
 
     useEffect(() => {
@@ -22,6 +44,21 @@ export default function EmployeeListing() {
 
     return (
         <>
+            {alertPopup && <Message message={successMessage} />}
+            <Button
+                variant='outlined'
+                color="secondary"
+                startIcon={<AddIcon />}
+                sx={{ borderRadius: 1, textTransform: 'none', fontWeight: '500' }}
+                onClick={handleFilter}
+            >Add Employee</Button>
+            {openPopup && <Popup
+                open={openPopup}
+                closePopup={handleClosePopup}
+                data={{}}
+                displayMessage={handleMessage}
+                addOrUpdate={'Add'}
+            />}
             <Grid container spacing={2}>
                 <Grid size={2} sx={{ borderRight: '1px solid' }}>
 

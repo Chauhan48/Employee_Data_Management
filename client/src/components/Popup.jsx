@@ -1,12 +1,18 @@
 import { Box, Button, Modal, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
-import { updateEmployeeData } from "../services/apiServices";
+import { addEmployeeData, updateEmployeeData } from "../services/apiServices";
 
 export default function Popup({ open, closePopup, data, displayMessage, addOrUpdate }) {
   const [employeeData, setEmployeeData] = useState(data);
 
   const handleClick = async () => {
-    const response = await updateEmployeeData(employeeData);
+    let response;
+    if(addOrUpdate === 'Add'){
+        response = await addEmployeeData(employeeData);
+
+    }else{
+        response = await updateEmployeeData(employeeData);
+    }
     displayMessage(response.message);
     closePopup();
   };

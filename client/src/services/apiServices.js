@@ -27,3 +27,12 @@ export const updateEmployeeData = async (employeeData) => {
         return err;
     }
 }
+
+export const addEmployeeData = async (employeeData) => {
+    try{
+        const response = await axios.post(`${API}/add-employee`, employeeData);
+        return response.data;
+    }catch(err){
+        return err;
+    }
+}
