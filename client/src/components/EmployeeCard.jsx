@@ -1,15 +1,17 @@
 import { Card, CardActionArea, Typography, Button } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import { deleteEmployeeData } from '../services/apiServices';
+import { useState } from 'react';
 
-export default function EmployeeCard({ employeeData }) {
+export default function EmployeeCard({ employeeData, handleChange }) {
 
     const handleEdit = () => {
-
     }
-
-    const handleDelete = () => {
-        
+    
+    const handleDelete = async () => {
+        const response = await deleteEmployeeData(employeeData.employeeId);
+        // handleChange();
     }
 
     return (

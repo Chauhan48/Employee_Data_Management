@@ -9,3 +9,12 @@ export const getEmployeeListing = async () => {
         return err;
     }
 }
+
+export const deleteEmployeeData = async (employeeId) => {
+    try{
+        const response = await axios.delete(`${API}/delete-employee?employeeId=${employeeId}`);
+        return response.data;
+    }catch(err){
+        return err;
+    }
+}
