@@ -4,6 +4,11 @@ async function addEmployee(employee){
     return await db("employees").insert(employee);
 }
 
+async function findEmployee(query){
+    return await db("employees").where(query);
+}
+
 module.exports = {
-    addEmployee
+    addEmployee,
+    findEmployee
 }
