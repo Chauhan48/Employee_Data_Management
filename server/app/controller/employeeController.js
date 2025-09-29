@@ -1,4 +1,4 @@
-const { addEmployee, findEmployee } = require("../services/dbServices");
+const { addEmployee, findEmployee, getEmployee, updateEmployee } = require("../services/dbServices");
 
 const employeeController = {};
 
@@ -11,6 +11,19 @@ employeeController.addEmployee = async (req, res) => {
         }
         await addEmployee({ name, email, position });
         return res.status(200).json({ message: 'Employee added successfully' });
+    } catch (err) {
+        return res.status(500).json({ message: 'Internal server error' })
+    }
+}
+
+employeeController.updateEmployee = async (req, res) => {
+    try {
+        const { employeeId, name, email, position } = req.body;
+        const update = await updateEmployee({ name, email, position }, { employeeId });
+        if (!update) {
+            return res.status(400).json({ message: 'Employee not found or no changes made.' })
+        }
+        return res.status(200).json({ message: 'Data updated successfully' })
     } catch (err) {
         return res.status(500).json({ message: 'Internal server error' })
     }

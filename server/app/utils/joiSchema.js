@@ -10,4 +10,13 @@ joiSchema.addEmployeeSchema = {
     })
 }
 
+joiSchema.updateEmployeeSchema = {
+    body: joi.object({
+        employeeId: joi.number().required(),
+        name: joi.string().required(),
+        email: joi.string().required(),
+        position: joi.string().required()
+    })
+}
+
 module.exports = joiSchema;
