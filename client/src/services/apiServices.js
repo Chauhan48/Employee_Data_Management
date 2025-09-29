@@ -36,3 +36,13 @@ export const addEmployeeData = async (employeeData) => {
         return err;
     }
 }
+
+export const filterEmployeeData = async (filterData = {}) => {
+    try{
+        const queryString = new URLSearchParams(filterData).toString();
+        const response = await axios.get(`${API}/filter-employee?${queryString}`);
+        return response;
+    }catch(err){
+        return err;
+    }
+}

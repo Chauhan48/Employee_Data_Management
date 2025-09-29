@@ -3,26 +3,36 @@ import Dropdown from "./Dropdown";
 import ClearIcon from '@mui/icons-material/Clear';
 import FilterListAltIcon from '@mui/icons-material/FilterListAlt';
 import { useEffect, useState } from "react";
+import { filterEmployeeData } from "../services/apiServices";
 
-export default function FilterComponent({positionListing}) {
+export default function FilterComponent({positionListing, handleFilterData}) {
     const [positions, setPositions] = useState([]);
     const [position, setPosition] = useState('');
     const [name, setName] = useState('');
 
     useEffect(() => {
         setPositions(positionListing)
-    }, positionListing)
+    }, [positionListing])
 
     const handleFilter = (field, option) => {
         setPosition(option)
     }
 
     const removeFilterListing = () => {
-
+        window.location.reload()
     }
 
-    const updateeEmployeeListing = () => {
-
+    const updateeEmployeeListing = async () => {
+        const filterData = {};
+        if(position !== ''){
+            filterData.position = position;
+        }
+        if(name !== ''){
+            filterData.name = name;
+        }
+        const res = await filterEmployeeData(filterData);
+        handleFilterData(res.data.employees)
+        console.log(res.data);
     }
 
     return (

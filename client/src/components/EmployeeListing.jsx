@@ -35,6 +35,10 @@ export default function EmployeeListing() {
         setOpenPopup(true);
     }
 
+    const updatedEmployeeListing = (empList) => {
+        setEmployeeListing(empList)
+    }
+
     useEffect(() => {
         async function apiData() {
             const res = await getEmployeeListing();
@@ -63,7 +67,7 @@ export default function EmployeeListing() {
             />}
             <Grid container spacing={2}>
                 <Grid size={2} sx={{ borderRight: '1px solid' }}>
-                    <FilterComponent positionListing={positions} />
+                    <FilterComponent positionListing={positions} handleFilterData={updatedEmployeeListing} />
                 </Grid>
                 <Grid container size={10} spacing={4} sx={{ padding: 4 }}>
                     {employeeListing.map(it =>
