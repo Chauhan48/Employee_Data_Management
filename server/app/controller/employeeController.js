@@ -5,6 +5,7 @@ const employeeController = {};
 employeeController.addEmployee = async (req, res) => {
     try {
         const { name, email, position } = req.body;
+        
         await addEmployee({ name, email, position });
         return res.status(200).json({ message: 'Employee added successfully' });
     } catch (err) {
