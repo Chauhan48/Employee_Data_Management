@@ -1,4 +1,4 @@
-const { addEmployee, findEmployee, getEmployee, updateEmployee, deleteEmployee } = require("../services/dbServices");
+const { addEmployee, findEmployee, updateEmployee, deleteEmployee, getEmployees, getDistinctFields } = require("../services/dbServices");
 const { db } = require("../startup/databaseStartup");
 
 const employeeController = {};
@@ -44,19 +44,33 @@ employeeController.deleteEmployee = async (req, res) => {
 }
 
 employeeController.filterEmployee = async (req, res) => {
-    try{
+    try {
         const data = req.query;
         let query = db('employees');
-        
-        if(Object.hasOwn(data, 'position')){
+
+        if (Object.hasOwn(data, 'position')) {
             query.where('position', data.position);
         }
-        if(Object.hasOwn(data, 'name')){
+        if (Object.hasOwn(data, 'name')) {
             query.where('name', 'like', `%${data.name}%`);
         }
         const employees = await query;
-        return res.status(200).json({employees});
+        return res.status(200).json({ employees });
 
+    } catch (err) {
+        console.log(err)
+        return res.status(500).json({ message: 'Internal server error' })
+    }
+}
+
+employeeController.getEmployees = async (req, res) => {
+    try {
+        const emplyees = await getEmployees();
+        const positions = await getDistinctFields('position');
+        if (emplyees.length === 0) {
+            return res.status(200).json({ message: 'There are currently no employees' });
+        }
+        return res.status(200).json({ emplyees, positions });
     } catch (err) {
         console.log(err)
         return res.status(500).json({ message: 'Internal server error' })

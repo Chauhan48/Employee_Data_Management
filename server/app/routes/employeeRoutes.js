@@ -12,4 +12,6 @@ employeeRoutes.delete('/delete-employee', schemaValidation(joiSchema.deleteEmplo
 
 employeeRoutes.get('/filter-employee', schemaValidation(joiSchema.filterEmployeeSchema), employeeController.filterEmployee);
 
+employeeRoutes.get('/get-employees', employeeController.getEmployees);
+
 module.exports = employeeRoutes

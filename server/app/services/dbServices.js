@@ -8,7 +8,7 @@ async function findEmployee(filter){
     return await db("employees").where(filter);
 }
 
-async function getEmployee(){
+async function getEmployees(){
     return await db('employees').select('*');
 }
 
@@ -20,10 +20,15 @@ async function deleteEmployee(filter){
     return await db('employees').where(filter).del();
 }
 
+async function getDistinctFields(filter){
+    return await db('employees').distinct(filter);
+}
+
 module.exports = {
     addEmployee,
     findEmployee,
-    getEmployee,
+    getEmployees,
     updateEmployee,
-    deleteEmployee
+    deleteEmployee,
+    getDistinctFields
 }
