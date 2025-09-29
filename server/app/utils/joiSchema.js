@@ -25,4 +25,11 @@ joiSchema.deleteEmployeeSchema = {
     })
 }
 
+joiSchema.filterEmployeeSchema = {
+    query: joi.object({
+        name: joi.string().optional(),
+        position: joi.string().optional()
+    })
+}
+
 module.exports = joiSchema;

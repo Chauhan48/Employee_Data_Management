@@ -1,4 +1,5 @@
 const { addEmployee, findEmployee, getEmployee, updateEmployee, deleteEmployee } = require("../services/dbServices");
+const { db } = require("../startup/databaseStartup");
 
 const employeeController = {};
 
@@ -38,6 +39,26 @@ employeeController.deleteEmployee = async (req, res) => {
         }
         return res.status(200).json({ message: 'Employee data deleted successfully' })
     } catch (err) {
+        return res.status(500).json({ message: 'Internal server error' })
+    }
+}
+
+employeeController.filterEmployee = async (req, res) => {
+    try{
+        const data = req.query;
+        let query = db('employees');
+        
+        if(Object.hasOwn(data, 'position')){
+            query.where('position', data.position);
+        }
+        if(Object.hasOwn(data, 'name')){
+            query.where('name', 'like', `%${data.name}%`);
+        }
+        const employees = await query;
+        return res.status(200).json({employees});
+
+    } catch (err) {
+        console.log(err)
         return res.status(500).json({ message: 'Internal server error' })
     }
 }
