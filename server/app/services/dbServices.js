@@ -21,7 +21,7 @@ async function deleteEmployee(filter){
 }
 
 async function getDistinctFields(filter){
-    return await db('employees').distinct(filter);
+    return await db('employees').distinct(filter).pluck(filter);
 }
 
 module.exports = {

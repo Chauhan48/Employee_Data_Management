@@ -5,12 +5,14 @@ import { Button, Grid } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import Popup from "./Popup";
 import Message from "./Message";
+import FilterComponent from "./FilterComponent";
 
 export default function EmployeeListing() {
     const [employeeListing, setEmployeeListing] = useState([]);
     const [openPopup, setOpenPopup] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [alertPopup, setAlertPopup] = useState(false);
+    const [positions, setPositions] = useState([]);
 
     const handleMessage = (message) => {
         setSuccessMessage(message);
@@ -36,8 +38,8 @@ export default function EmployeeListing() {
     useEffect(() => {
         async function apiData() {
             const res = await getEmployeeListing();
-            setEmployeeListing(res.employees)
-            console.log(res);
+            setEmployeeListing(res.employees);
+            setPositions(res.positions);
         }
         apiData();
     }, [])
@@ -46,7 +48,7 @@ export default function EmployeeListing() {
         <>
             {alertPopup && <Message message={successMessage} />}
             <Button
-                variant='outlined'
+                variant='contained'
                 color="secondary"
                 startIcon={<AddIcon />}
                 sx={{ borderRadius: 1, textTransform: 'none', fontWeight: '500' }}
@@ -61,7 +63,7 @@ export default function EmployeeListing() {
             />}
             <Grid container spacing={2}>
                 <Grid size={2} sx={{ borderRight: '1px solid' }}>
-
+                    <FilterComponent positionListing={positions} />
                 </Grid>
                 <Grid container size={10} spacing={4} sx={{ padding: 4 }}>
                     {employeeListing.map(it =>
