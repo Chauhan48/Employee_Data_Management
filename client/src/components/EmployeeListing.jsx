@@ -67,18 +67,24 @@ export default function EmployeeListing() {
                 displayMessage={handleMessage}
                 addOrUpdate={'Add'}
             />}
-            <Grid container spacing={2}>
-                <Grid size={2} sx={{ borderRight: '1px solid', p: 2 }}>
-                    <FilterComponent positionListing={positions} handleFilterData={updatedEmployeeListing} />
+            {employeeListing ?
+                <Grid container spacing={2}>
+                    <Grid size={2} sx={{ borderRight: '1px solid', p: 2 }}>
+                        <FilterComponent positionListing={positions} handleFilterData={updatedEmployeeListing} />
+                    </Grid>
+                    <Grid container size={10} spacing={4} sx={{ padding: 4 }}>
+                        {employeeListing.map(it =>
+                            <Grid item key={it.employeeId} xs={12} sm={6} md={4}>
+                                <EmployeeCard employeeData={it} handleChange={handleChildComponent} />
+                            </Grid>
+                        )}
+                    </Grid>
+
                 </Grid>
-                <Grid container size={10} spacing={4} sx={{ padding: 4 }}>
-                    {employeeListing.map(it =>
-                        <Grid item key={it.employeeId} xs={12} sm={6} md={4}>
-                            <EmployeeCard employeeData={it} handleChange={handleChildComponent} />
-                        </Grid>
-                    )}
-                </Grid>
-            </Grid>
+                : 
+                <Typography variant="h6" sx={{ fontWeightMedium: 200, color: '#141414ff', marginLeft: '48%', marginRight: '28%' }}>There are currently no employees in the system.</Typography>
+                
+            }
         </>
     )
 }
