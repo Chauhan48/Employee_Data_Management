@@ -55,8 +55,9 @@ export default function EmployeeListing() {
             <Button
                 variant='contained'
                 color="secondary"
+                size="large"
                 startIcon={<AddIcon />}
-                sx={{ borderRadius: 1, textTransform: 'none', fontWeight: '500' }}
+                sx={{ borderRadius: 1, textTransform: 'none', fontWeight: '500', borderRadius: '40px' }}
                 onClick={handleFilter}
             >Add Employee</Button>
             {openPopup && <Popup
