@@ -1,0 +1,27 @@
+{
+  "name": "employee_data_management",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/Chauhan48/Employee_Data_Management#readme",
+  "bugs": {
+    "url": "https://github.com/Chauhan48/Employee_Data_Management/issues"
+  },
+  "script": {
+    "install:all": "npm install --prefix client && npm install --prefix server",
+    "migrate": "npm run migrate --prefix server",
+    "dev": "concurrently \"npm run migrate --prefix server && npm start --prefix server\" \"npm run dev --prefix client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chauhan48/Employee_Data_Management.git"
+  },
+  "license": "ISC",
+  "author": "Anshit Chauhan",
+  "type": "commonjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
