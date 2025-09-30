@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import EmployeeCard from "./EmployeeCard";
 import { getEmployeeListing } from "../services/apiServices";
-import { Button, Grid } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import Popup from "./Popup";
 import Message from "./Message";
@@ -50,6 +50,7 @@ export default function EmployeeListing() {
 
     return (
         <>
+            <Typography variant="h4" sx={{ fontWeightMedium: 500, color: '#141414ff', marginLeft: '50%', marginRight: '28%' }}>Employee listing</Typography>
             {alertPopup && <Message message={successMessage} />}
             <Button
                 variant='contained'
