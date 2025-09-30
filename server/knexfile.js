@@ -8,5 +8,8 @@ module.exports = {
     migrations: {
       directory: "./app/migrations",
     },
+    seeds: {
+      directory: './app/seeds'
+    }
   },
 };
