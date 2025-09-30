@@ -66,7 +66,7 @@ export default function EmployeeListing() {
                 addOrUpdate={'Add'}
             />}
             <Grid container spacing={2}>
-                <Grid size={2} sx={{ borderRight: '1px solid' }}>
+                <Grid size={2} sx={{ borderRight: '1px solid', p: 2 }}>
                     <FilterComponent positionListing={positions} handleFilterData={updatedEmployeeListing} />
                 </Grid>
                 <Grid container size={10} spacing={4} sx={{ padding: 4 }}>
